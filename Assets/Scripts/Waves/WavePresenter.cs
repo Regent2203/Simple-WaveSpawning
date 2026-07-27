@@ -42,8 +42,9 @@ namespace ThisProject.Waves
         private void OnEnemyCountChanged(EnemyCountChangedSignal signal)
         {
             _currentEnemyCount += signal.Delta;
-            // Защита от ухода счетчика в минус при математических погрешностях
-            if (_currentEnemyCount < 0) _currentEnemyCount = 0;
+
+            if (_currentEnemyCount < 0) 
+                _currentEnemyCount = 0;
 
             _ui.UpdateEnemyCount(_currentEnemyCount);
         }

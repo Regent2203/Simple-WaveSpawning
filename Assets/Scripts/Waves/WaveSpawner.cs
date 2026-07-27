@@ -79,7 +79,7 @@ namespace ThisProject.Waves
                     spawnPos += new Vector2(wave.EnemySpacing, 0);
                 }
 
-                //3. wait wave.RepeatCount after each repeat expect final!
+                //3. wait wave.DelayRepeat after each repeat expect final!
                 if (wave.DelayRepeat > 0 && r < repeats - 1)
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(wave.DelayRepeat), cancellationToken: token);

@@ -66,8 +66,6 @@ namespace ThisProject.Enemies
 
         private void OnTargetReached()
         {
-            //some animation?
-
             _signalBus.Fire(new EnemyCountChangedSignal { Delta = -1 });
             _pool.Despawn(this);
         }
