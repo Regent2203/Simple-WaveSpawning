@@ -1,13 +1,17 @@
+using System.Collections.Generic;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using Zenject;
 
-namespace ThisProject.Unsorted
+namespace ThisProject.Waves
 {
     [CreateAssetMenu(fileName = "WavesConfig", menuName = "ThisProject/WavesConfig")]
-    public class WavesConfig : ScriptableObjectInstaller<WavesConfig>
+    public class WaveConfig : ScriptableObjectInstaller<WaveConfig>
     {
         [SerializeField]
-        //private List
+        private List<Wave> _waves;
+
+        public IReadOnlyList<Wave> Waves => _waves;
 
 
         public override void InstallBindings()

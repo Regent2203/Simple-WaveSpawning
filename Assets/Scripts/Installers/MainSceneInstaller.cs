@@ -1,4 +1,4 @@
-using ThisProject.Unsorted;
+using ThisProject.Enemies;
 using UnityEngine;
 using Zenject;
 
@@ -14,7 +14,9 @@ namespace ThisProject.Installers
 
         public override void InstallBindings()
         {
-            Container.BindMemoryPool<EnemyView, EnemyViewPool>().WithInitialSize(100).
+            Container.Bind<EnemyFactory>().AsSingle();
+
+            Container.BindMemoryPool<EnemyView, EnemyViewPool>().WithInitialSize(50).
                 FromComponentInNewPrefab(_enemyViewPrefab).UnderTransform(_enemyViewContainer);
         }
     }
