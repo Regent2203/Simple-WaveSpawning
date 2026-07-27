@@ -58,16 +58,13 @@ namespace ThisProject.Enemies
 
         public void SetTarget(Vector2 endPos, int steps)
         {
-            Vector2 startPos = transform.position;
-            //_speed = (endPos - startPos) / steps;
-
-            //todo dotween
             _moveTween = transform.DOMove(endPos, steps).OnComplete(OnTargetReached);
         }
 
         private void OnTargetReached()
         {
             //some animation?
+            //Debug.Log($"{name} has reached target.");
 
             _pool.Despawn(this);
         }

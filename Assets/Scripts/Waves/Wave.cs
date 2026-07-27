@@ -1,8 +1,10 @@
-﻿using ThisProject.Enemies;
+﻿using System;
+using ThisProject.Enemies;
 using UnityEngine;
 
 namespace ThisProject.Waves
 {
+    [Serializable]
     public struct Wave
     {
         public float DelayBefore;
@@ -14,5 +16,6 @@ namespace ThisProject.Waves
         public int ReachSteps;
         public float DelayAfter;
         public int RepeatCount;
+        public float DelayRepeat;
     }
 }

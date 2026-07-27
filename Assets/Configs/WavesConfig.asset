@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbd93c939ba6fc4fabb1127bd948386, type: 3}
+  m_Name: WavesConfig
+  m_EditorClassIdentifier: 
+  _waves:
+  - DelayBefore: 2
+    Enemy: {fileID: 11400000, guid: 474c15b1f577d724ba1200cec79340e2, type: 2}
+    EnemyCount: 4
+    EnemySpacing: 3
+    Position: {x: 0, y: -4}
+    Target: {x: 0, y: 4}
+    ReachSteps: 5
+    DelayAfter: 3
+    RepeatCount: 0
+    DelayRepeat: 0
+  - DelayBefore: 0
+    Enemy: {fileID: 11400000, guid: ab3750f453a6bfd499573a48bc377393, type: 2}
+    EnemyCount: 1
+    EnemySpacing: 0
+    Position: {x: 0, y: -2}
+    Target: {x: 0, y: 4}
+    ReachSteps: 3
+    DelayAfter: 2
+    RepeatCount: 1
+    DelayRepeat: 0.5
+  - DelayBefore: 3
+    Enemy: {fileID: 11400000, guid: 62d04914ce21268438205fde55a3c32b, type: 2}
+    EnemyCount: 10
+    EnemySpacing: 1.5
+    Position: {x: 0, y: -4}
+    Target: {x: 0, y: 4}
+    ReachSteps: 10
+    DelayAfter: 0
+    RepeatCount: 3
+    DelayRepeat: 2

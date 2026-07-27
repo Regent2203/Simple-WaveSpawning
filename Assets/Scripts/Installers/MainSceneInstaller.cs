@@ -1,4 +1,5 @@
 using ThisProject.Enemies;
+using ThisProject.Waves;
 using UnityEngine;
 using Zenject;
 
@@ -14,9 +15,10 @@ namespace ThisProject.Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<EnemyFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<WaveSpawner>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle();
 
-            Container.BindMemoryPool<EnemyView, EnemyViewPool>().WithInitialSize(50).
+            Container.BindMemoryPool<EnemyView, EnemyViewPool>().WithInitialSize(10).
                 FromComponentInNewPrefab(_enemyViewPrefab).UnderTransform(_enemyViewContainer);
         }
     }
