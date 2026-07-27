@@ -1,4 +1,5 @@
 using DG.Tweening;
+using ThisProject.Installers;
 using UnityEngine;
 using Zenject;
 
@@ -11,17 +12,19 @@ namespace ThisProject.Enemies
 
         private int _id;
         private EnemyType _enemyType;
-
+        
         private Tween _moveTween;
         private EnemyViewPool _pool;
+        private SignalBus _signalBus;
 
         const string _emptyName = "Enemy";
 
 
         [Inject]
-        public void Construct(EnemyViewPool pool)
+        public void Construct(EnemyViewPool pool, SignalBus signalBus)
         {
             _pool = pool;
+            _signalBus = signalBus;
         }
         
         public virtual void OnSpawned(int id, EnemyType enemyType, Vector2 startPos, Vector2 endPos, int steps)
@@ -64,8 +67,8 @@ namespace ThisProject.Enemies
         private void OnTargetReached()
         {
             //some animation?
-            //Debug.Log($"{name} has reached target.");
 
+            _signalBus.Fire(new EnemyCountChangedSignal { Delta = -1 });
             _pool.Despawn(this);
         }
 

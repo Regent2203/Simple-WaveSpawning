@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 using ThisProject.Enemies;
+using ThisProject.Installers;
 using UnityEngine;
 using Zenject;
 
@@ -11,14 +12,16 @@ namespace ThisProject.Waves
     {
         private WaveConfig _waveConfig;
         private EnemyFactory _enemyFactory;
+        private readonly SignalBus _signalBus;
 
         private readonly CancellationTokenSource _cts = new();
 
 
-        public WaveSpawner(WaveConfig waveConfig, EnemyFactory enemyFactory)
+        public WaveSpawner(WaveConfig waveConfig, EnemyFactory enemyFactory, SignalBus signalBus)
         {
             _waveConfig = waveConfig;
             _enemyFactory = enemyFactory;
+            _signalBus = signalBus;
         }
 
         public void Initialize()
@@ -34,11 +37,18 @@ namespace ThisProject.Waves
 
         private async UniTaskVoid WorkAsync(CancellationToken token)
         {
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
+
             try
             {
+                int currentWaveNumber = 1;
                 foreach (var wave in _waveConfig.Waves)
                 {
+                    _signalBus.Fire(new WaveChangedSignal { WaveNumber = currentWaveNumber });
+
                     await ProcessWaveAsync(wave, token);
+
+                    currentWaveNumber++;
                 }
                 Debug.Log("Waves spawn has been finished successfully.");
             }
@@ -65,6 +75,7 @@ namespace ThisProject.Waves
                 for (int i = 0; i < wave.EnemyCount; i++)
                 {
                     _enemyFactory.CreateEnemy(wave.Enemy, spawnPos, wave.Target, wave.ReachSteps);
+                    _signalBus.Fire(new EnemyCountChangedSignal { Delta = 1 });
                     spawnPos += new Vector2(wave.EnemySpacing, 0);
                 }
 
